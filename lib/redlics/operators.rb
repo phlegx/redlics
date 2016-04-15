@@ -43,8 +43,8 @@ module Redlics
     #
     # @param query [Redlics::Query] Redlics query object
     # @return [Redlics::Query::Operation] a Redlics query operation object
-    def -(event)
-      Query::Operation.new('MINUS', [self, event])
+    def -(query)
+      Query::Operation.new('MINUS', [self, query])
     end
 
   end

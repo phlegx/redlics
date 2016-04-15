@@ -77,11 +77,9 @@ module Redlics
 
 
   # Set configuration of Redlics in a block.
-  #
-  # @param [&Block] a block with configuration assignments
   # @return [OpenStruct] Redlics configuration
   def configure
-    yield(config) if block_given?
+    yield config if block_given?
   end
 
 

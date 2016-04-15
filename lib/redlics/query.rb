@@ -167,9 +167,8 @@ module Redlics
       # Short query access to analyze data.
       #
       # @param *args [Array] list of arguments of the query
-      # @param [&Block] a block to process the analysis
       # @return [Redlics::Query] instantiated query object
-      def analyze(*args, &block)
+      def analyze(*args)
         options = args.last.instance_of?(Hash) ? args.pop : {}
         query = case args.size
         when 2
