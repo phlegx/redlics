@@ -18,7 +18,7 @@ module Redlics
 
       # Initialization with default error message.
       #
-      # @param msq [String] the error message
+      # @param msg [String] the error message
       # @return [Redlics::Exception::LuaRangeError] error message
       def initialize(msg = 'Too many keys (max. 8000 keys defined by LUAI_MAXCSTACK)')
         super(msg)

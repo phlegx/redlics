@@ -81,7 +81,7 @@ module Redlics
         )
         format_plot(Redlics::CONTEXTS[:counter], result)
       )
-    rescue JSON::ParserError => e
+    rescue JSON::ParserError
       nil
     end
 
@@ -98,7 +98,7 @@ module Redlics
         )
         format_plot(Redlics::CONTEXTS[:tracker], result)
       )
-    rescue JSON::ParserError => e
+    rescue JSON::ParserError
       nil
     end
 
@@ -171,11 +171,11 @@ module Redlics
       def analyze(*args)
         options = args.last.instance_of?(Hash) ? args.pop : {}
         query = case args.size
-        when 2
-          Query.new(args[0], args[1], options)
-        when 3
-          Query.new(args[0], args[1], options.merge!({ id: args[2].to_i }))
-        end
+                when 2
+                  Query.new(args[0], args[1], options)
+                when 3
+                  Query.new(args[0], args[1], options.merge!({ id: args[2].to_i }))
+                end
         return yield query if block_given?
         query
       end

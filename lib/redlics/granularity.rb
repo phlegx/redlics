@@ -38,10 +38,10 @@ module Redlics
       def check(granularities)
         keys = Redlics.config.granularities.keys
         checked = if granularities.is_a?(Range)
-          keys[keys.index(granularities.first)..keys.index(granularities.last)]
-        else
-          [granularities].flatten & Redlics.config.granularities.keys
-        end
+                    keys[keys.index(granularities.first)..keys.index(granularities.last)]
+                  else
+                    [granularities].flatten & Redlics.config.granularities.keys
+                  end
         checked.any? ? checked : nil
       end
 
