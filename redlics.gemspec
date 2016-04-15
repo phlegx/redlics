@@ -21,6 +21,7 @@ Gem::Specification.new do |spec|
   spec.test_files    = Dir.glob('test/*_test.rb')
   spec.require_paths = ['lib']
 
+  spec.required_ruby_version = '>= 2.0.0'
   spec.add_dependency 'connection_pool', '~> 2.2'
   spec.add_dependency 'redis', '~> 3.2'
   spec.add_dependency 'redis-namespace', '~> 1.5'

@@ -1,4 +1,3 @@
-# encoding: UTF-8
 require 'redlics/version'
 require 'redlics/config'
 require 'redlics/exception'

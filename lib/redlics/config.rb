@@ -1,10 +1,3 @@
-# Configure Redis
-#
-# etc/redis/redis.conf
-# hash-max-ziplist-entries 1024
-# hash-max-ziplist-value 64
-
-
 module Redlics
 
   # Redlics constants.
@@ -17,6 +10,12 @@ module Redlics
   class Config
 
     # Initialization with default configuration.
+    #
+    # Configure Redis:
+    # etc/redis/redis.conf
+    # hash-max-ziplist-entries 1024
+    # hash-max-ziplist-value 64
+    #
     # @return [OpenStruct] default configuration
     def initialize
       @config = OpenStruct.new(
