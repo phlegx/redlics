@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.authors       = ['Egon Zemmer']
   spec.email         = ['office@phlegx.com']
   spec.date          = Time.now.utc.strftime('%Y-%m-%d')
-  spec.homepage      = 'http://github.com/phlegx/#{s.name}'
+  spec.homepage      = "http://github.com/phlegx/#{spec.name}"
 
   spec.summary       = %q{Redis analytics with tracks and counts.}
   spec.description   = %q{Redis analytics with tracks (using bitmaps) and counts (using buckets)
