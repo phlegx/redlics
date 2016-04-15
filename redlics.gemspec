@@ -17,7 +17,7 @@ Gem::Specification.new do |spec|
                           encoding numbers in Redis keys and values.}
   spec.license       = 'MIT'
 
-  spec.files         = `git ls-files -z`.split('\x0').reject { |f| f.match(%r{^(test|spec|features)/}) }
+  spec.files         = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }
   spec.test_files    = Dir.glob('test/*_test.rb')
   spec.require_paths = ['lib']
 
