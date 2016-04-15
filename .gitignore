@@ -1,0 +1,6 @@
+*.lock
+*.gem
+*.swp
+.project
+.ruby-version
+.ruby-gemset
