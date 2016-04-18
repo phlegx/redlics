@@ -102,7 +102,7 @@ Read more:
 
 #### Encoding
 
-If Redlics is configured to encode events and object ids all numbers are encoded to save memory.
+If Redlics is configured to encode events and object ids, all numbers are encoded to save memory.
 
 ```ruby
 config.encode = {
@@ -125,13 +125,11 @@ Redlics::Key.encode(1234)
 * Event encoding
 
 Encodes numbers in event names separated by the defined separator in the configuration.
-
-Event name: `products:1234`
-Encoded event: `products:2+`
+**Event name:** `products:1234`, **encoded event:** `products:2+`.
 
 ### Counting
 
-Counting an event can be done by call count with arguments, hash parameters or a block.
+Counting an event can be done by call count with **arguments**, **hash parameters** or a **block**.
 
 ```ruby
 # By arguments
@@ -168,7 +166,7 @@ end
 
 ### Tracking
 
-Tracking an event can be done by call track with arguments, hash parameters or a block.
+Tracking an event can be done by call track with **arguments**, **hash parameters** or a **block**.
 
 ```ruby
 # By arguments
@@ -190,7 +188,7 @@ Redlics.track do |t|
   # t.granularity = :daily
   # t.granularity = [:daily, :monthly]
 
-  # Expire (delete) count for this event for specific granularities after defined period.
+  # Expire (delete) tracking for this event for specific granularities after defined period.
   t.expiration_for = { daily: 6.days, monthly: 2.months }
 end
 ```
@@ -219,20 +217,20 @@ a3 = Redlics.analyze('products:list', :today, id: 1234)
 
 * **event:** event name **(required)**.
 * **time:** time object **(required)**, can be:
-** a symbol: predefined in Redlics::TimeFrame.init_with_symbol
-*** e.g. *:hour, :day, :week, :month, :year, :today, :yesterday, :this_week, :last_week, :this_month, :last_month, :this_year, :last_year*
-** a hash: with keys `from` and `to`
-*** e.g. `{ from: 30.days.ago, to: Time.now}`
-** a range: defined as a range
-*** e.g. `30.days.ago..Time.now`
-** a time: simple time object
-*** e.g. `Time.new(2016, 1, 12)` or `1.day.ago.to_time`
+  * a symbol: predefined in Redlics::TimeFrame.init_with_symbol
+    * e.g. *:hour, :day, :week, :month, :year, :today, :yesterday, :this_week, :last_week, :this_month, :last_month, :this_year, :last_year*
+  * a hash: with keys `from` and `to`
+    * e.g. `{ from: 30.days.ago, to: Time.now}`
+  * a range: defined as a range
+    * e.g. `30.days.ago..Time.now`
+  * a time: simple time object
+    * e.g. `Time.new(2016, 1, 12)` or `1.day.ago.to_time`
 * **Options:**
-** **id:** object id, e.g. user id
-** **granularity:** one granularitiy defined in configuration (optional), if not set first element of `config.counter_granularity` is used.
+  * **id:** object id, e.g. user id
+  * **granularity:** one granularitiy defined in configuration (optional), if not set first element of `config.counter_granularity` is used.
 
 Analyzable query objects can be used to analyze **counts** and **tracks**.
-Queries are not *realized* until an action is performed:
+Queries are not *"realized"* until an action is performed:
 
 #### Counts
 
@@ -240,7 +238,7 @@ Queries are not *realized* until an action is performed:
 # Check how many counts has been recorded.
 a1.counts
 
-# Use this method to get plot friendly data for graphs.
+# Use this method to get plot-friendly data for graphs.
 a1.plot_counts
 
 # See what's under the hood. No Redis access.
@@ -250,13 +248,13 @@ a1.realize_counts!
 #### Tracks
 
 ```ruby
-# Check how many tracks has been recorded.
+# Check how many unique tracks has been recorded.
 a1.tracks
 
 # Check if given id exists in the tracks result.
 a1.exists?
 
-# Use this method to get plot friendly data for graphs.
+# Use this method to get plot-friendly data for graphs.
 a1.plot_tracks
 
 # See what's under the hood. No Redis access.
@@ -314,10 +312,12 @@ possible to use operators to check users that:
 * but not logged in today
 
 ```ruby
+# Create analyzable query objects
 a1 = Redlics.analyze('products:list', :today)
 a2 = Redlics.analyze('products:featured', :today)
 a3 = Redlics.analyze('logged_in', :today)
 
+# The operation
 o = (( a1 & a2) - a3)
 
 # To check how many users are in this result set.
