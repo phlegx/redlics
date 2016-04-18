@@ -24,6 +24,8 @@ Redis analytics with tracks (using bitmaps) and counts (using buckets) encoding 
 
 ## Installation
 
+**System Requirements:** Redis >= 2.8.18, Redis v3.x is recommended!
+
 Add this line to your application's Gemfile:
 
 ```ruby
