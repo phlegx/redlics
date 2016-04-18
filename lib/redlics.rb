@@ -1,3 +1,4 @@
+require 'msgpack'
 require 'redlics/version'
 require 'redlics/config'
 require 'redlics/exception'
