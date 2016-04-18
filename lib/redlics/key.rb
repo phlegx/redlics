@@ -17,6 +17,7 @@ module Redlics
     # @return [Array] bucketized key name
     def name(context, event, granularity, past, options = {})
       past ||= Time.now
+      event ||= 'nil'
       granularity = Granularity.validate(context, granularity).first
       event = encode_event(event) if Redlics.config.encode[:events]
       key = "#{context[:short]}#{Redlics.config.separator}#{event}#{Redlics.config.separator}#{time_format(granularity, past)}"
@@ -67,7 +68,7 @@ module Redlics
       number = (number.size % 2) != 0 ? "0#{number}" : number
       token = 0
       while token <= number.size - 1
-        encoded += encode_map[number[token..token+1].to_i.to_s.to_sym].to_s
+        encoded += encode_map[number[token..token+1].to_i.to_s].to_s
         token += 2
       end
       encoded
@@ -83,7 +84,7 @@ module Redlics
       string = string.to_s
       token = 0
       while token <= string.size - 1
-        number = decode_map[string[token].to_s.to_sym].to_s
+        number = decode_map[string[token]].to_s
         decoded += number.size == 1 ? "0#{number}" : number
         token += 1
       end
