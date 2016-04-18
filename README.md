@@ -107,7 +107,7 @@ Read more:
 
 Results in:
 
-* **Bucket nr.:** 2 (part of Redis key)
+* **Bucket nr.:** 1 (part of Redis key)
 * **Bucket entry nr.:** 234 (part of Redis value)
 
 #### Encoding
@@ -135,7 +135,7 @@ Redlics::Key.encode(1234)
 * Event encoding
 
 Encodes numbers in event names separated by the defined separator in the configuration.
-**Event name:** `products:1234`, **encoded event:** `products:2+`.
+**Event name:** `products:1234`, **encoded event:** `products:!k`.
 
 ### Counting
 
@@ -338,6 +338,48 @@ o.exists?(1234)
 
 # Clean up complete operation results.
 o.reset!(:tree)
+```
+
+### Tips and hints
+
+#### Granularities
+
+* You should be aware that there is a close relation between counting, tracking and querying in regards to granularities.
+* When querying, make sure to tracking in the same granularity.
+* If you are tracking in the range of `:daily..:monthly` then you can only query in that range (or you will get wrong results).
+* Another possible error you should be aware of is when querying for a time frame that is not correlated with the granularity.
+
+#### Buckets
+
+* Use buckets if you have many counters to save memory.
+* 1000 is the ideal bucket size.
+
+#### Encoding
+
+* Use event and ids encoding if you have many counters to save memory.
+
+#### Namespaces
+
+Keys in Redis look like this:
+
+```
+# Tracker
+rl:t:products:list:2016
+
+# Counter without buckets (unencoded)
+rl:c:products:list:2016:1234
+
+# Counter without buckets (encoded)
+rl:c:products:list:2016:!k
+
+# Counter with buckets (unencoded, 234 is value of key)
+rl:c:products:list:2016:1 -> 234
+
+# Counter with buckets (encoded, 3k is value of key)
+rl:c:products:list:2016:2 -> 3k
+
+# Operation
+rl:o:f56fa42d-1e85-4e2f-b8c8-a0f9b5bee5d0
 ```
 
 ## Contributors
