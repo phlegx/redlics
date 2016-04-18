@@ -1,6 +1,7 @@
 # Redlics
 
 [![Gem Version](https://badge.fury.io/rb/redlics.svg)](https://rubygems.org/gems/redlics)
+[![Gem](https://img.shields.io/gem/dt/rails.svg?maxAge=2592000)](https://rubygems.org/gems/redlics)
 [![Build Status](https://secure.travis-ci.org/phlegx/redlics.svg?branch=master)](https://travis-ci.org/phlegx/redlics)
 [![Code Climate](http://img.shields.io/codeclimate/github/phlegx/redlics.svg)](https://codeclimate.com/github/phlegx/redlics)
 [![Inline Docs](http://inch-ci.org/github/phlegx/redlics.svg?branch=master)](http://inch-ci.org/github/phlegx/redlics)
