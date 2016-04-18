@@ -187,7 +187,7 @@ module Redlics
       # @return [Integer] result of Redis delete keys
       # @return [NilClass] nil if namespaces are empty
       def finalize(namespaces)
-        proc { reset_redis_namespaces(namespaces); puts 'Redlics clean!' }
+        proc { reset_redis_namespaces(namespaces) }
       end
 
 
