@@ -12,7 +12,7 @@ module Redlics
     # Initialization with default configuration.
     #
     # Configure Redis:
-    # etc/redis/redis.conf
+    # /etc/redis/redis.conf
     # hash-max-ziplist-entries 1024
     # hash-max-ziplist-value 64
     #
