@@ -100,6 +100,16 @@ Read more:
 * [Special encoding of small aggregate data types](http://redis.io/topics/memory-optimization)
 * [Storing hundreds of millions of simple key-value pairs in Redis](http://instagram-engineering.tumblr.com/post/12202313862/storing-hundreds-of-millions-of-simple-key-value)
 
+##### Example
+
+* **Id:** 1234
+* **Bucket size**: 1000
+
+Results in:
+
+* **Bucket nr.:** 2 (part of Redis key)
+* **Bucket entry nr.:** 234 (part of Redis value)
+
 #### Encoding
 
 If Redlics is configured to encode events and object ids, all numbers are encoded to save memory.
@@ -217,13 +227,13 @@ a3 = Redlics.analyze('products:list', :today, id: 1234)
 
 * **event:** event name **(required)**.
 * **time:** time object **(required)**, can be:
-  * a symbol: predefined in Redlics::TimeFrame.init_with_symbol
+  * **a symbol:** predefined in Redlics::TimeFrame.init_with_symbol
     * e.g. *:hour, :day, :week, :month, :year, :today, :yesterday, :this_week, :last_week, :this_month, :last_month, :this_year, :last_year*
-  * a hash: with keys `from` and `to`
+  * **a hash:** with keys `from` and `to`
     * e.g. `{ from: 30.days.ago, to: Time.now}`
-  * a range: defined as a range
+  * **a range:** defined as a range
     * e.g. `30.days.ago..Time.now`
-  * a time: simple time object
+  * **a time:** simple time object
     * e.g. `Time.new(2016, 1, 12)` or `1.day.ago.to_time`
 * **Options:**
   * **id:** object id, e.g. user id
