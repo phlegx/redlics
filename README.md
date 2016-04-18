@@ -81,7 +81,7 @@ end
 
 #### Buckets
 
-If Redlics is configured to use buckets please configure Redis to allow an ideal size of list entries.
+If Redlics is configured to use buckets, please configure Redis to allow an ideal size of list entries.
 
 ```ruby
 # Redlics config
@@ -108,10 +108,10 @@ Read more:
 * **Id:** 1234
 * **Bucket size**: 1000
 
-Results in:
+results in:
 
 * **Bucket nr.:** 1 (part of Redis key)
-* **Bucket entry nr.:** 234 (part of Redis value)
+* **Bucket entry nr.:** 234 (part of Redis value as hash key)
 
 #### Encoding
 
