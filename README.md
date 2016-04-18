@@ -362,24 +362,24 @@ o.reset!(:tree)
 
 Keys in Redis look like this:
 
-```
+```ruby
 # Tracker
-rl:t:products:list:2016
+'rl:t:products:list:2016'
 
 # Counter without buckets (unencoded)
-rl:c:products:list:2016:1234
+'rl:c:products:list:2016:1234'
 
 # Counter without buckets (encoded)
-rl:c:products:list:2016:!k
+'rl:c:products:list:2016:!k'
 
 # Counter with buckets (unencoded, 234 is value of key)
-rl:c:products:list:2016:1 -> 234
+'rl:c:products:list:2016:1' => '234'
 
 # Counter with buckets (encoded, 3k is value of key)
-rl:c:products:list:2016:2 -> 3k
+'rl:c:products:list:2016:2' => '3k'
 
 # Operation
-rl:o:f56fa42d-1e85-4e2f-b8c8-a0f9b5bee5d0
+'rl:o:f56fa42d-1e85-4e2f-b8c8-a0f9b5bee5d0'
 ```
 
 ## Contributors
