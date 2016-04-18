@@ -15,7 +15,7 @@ module Redlics
     # @return [Array] list of counted granularities
     def count(*args, &block)
       return count_with_block(&block) if block_given?
-      return count_with_hash if args.first.is_a?(Hash)
+      return count_with_hash(args.first) if args.first.is_a?(Hash)
       count_with_args(*args)
     end
 
@@ -45,7 +45,7 @@ module Redlics
       # @return [Array] list of counted granularities
       def count_with_block
         yield options = OpenStruct.new
-        count_with_hash(options)
+        count_with_hash(options.to_h)
       end
 
 

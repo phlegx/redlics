@@ -15,7 +15,7 @@ module Redlics
     # @return [Array] list of tracked granularities
     def track(*args, &block)
       return track_with_block(&block) if block_given?
-      return track_with_hash if args.first.is_a?(Hash)
+      return track_with_hash(args.first) if args.first.is_a?(Hash)
       track_with_args(*args)
     end
 
@@ -43,7 +43,7 @@ module Redlics
       # @return [Array] list of tracked granularities
       def track_with_block
         yield options = OpenStruct.new
-        track_with_hash(options)
+        track_with_hash(options.to_h)
       end
 
 
