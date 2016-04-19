@@ -8,7 +8,7 @@
 [![Dependency Status](https://gemnasium.com/phlegx/redlics.svg)](https://gemnasium.com/phlegx/redlics)
 [![License](https://img.shields.io/github/license/phlegx/redlics.svg)](http://opensource.org/licenses/MIT)
 
-Redis analytics with tracks (using bitmaps) and counts (using buckets) encoding numbers in Redis keys and values.
+Record millions of tracks and counts consuming low memory! Redlics is a gem for Redis analytics with tracks (using bitmaps) and counts (using buckets) encoding numbers in Redis keys and values.
 
 ## Features
 
