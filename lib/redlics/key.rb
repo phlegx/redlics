@@ -97,7 +97,7 @@ module Redlics
     # @param string [String] the key name to check
     # @return [Boolean] true id key exists, false if not
     def exists?(key)
-      Redlics.redis.exists(key) == 1
+      Redlics.redis.exists(key)
     end
 
 
