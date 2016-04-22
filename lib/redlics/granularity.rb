@@ -37,10 +37,13 @@ module Redlics
       # @return [Array] includes all valid granularities
       def check(granularities)
         keys = Redlics.config.granularities.keys
-        checked = if granularities.is_a?(Range)
+        checked = case granularities
+                  when Range
                     keys[keys.index(granularities.first.to_sym)..keys.index(granularities.last.to_sym)]
+                  when Array
+                    [granularities.map(&:to_sym)].flatten & keys
                   else
-                    [granularities.to_sym].flatten & Redlics.config.granularities.keys
+                    [granularities && granularities.to_sym].flatten & keys
                   end
         checked.any? ? checked : nil
       end
