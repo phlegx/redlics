@@ -55,10 +55,7 @@ module Redlics
       # @return [Array] list of counted granularities
       def count_with_args(*args)
         options = args.last.instance_of?(Hash) ? args.pop : {}
-        options.merge!({
-          event: args[0],
-          id: args[1]
-        })
+        options.merge!(event: args[0])
         count_with_hash(options)
       end
 
@@ -72,7 +69,7 @@ module Redlics
         key = Key.name(CONTEXT, options[:event], granularity, options[:past], { id: options[:id], bucketized: true })
         Redlics.redis.pipelined do |redis|
           redis.hincrby(key[0], key[1], 1)
-          redis.expire(key[0], options[:expiration_for] && options[:expiration_for][granularity] || Redlics.config.counter_expirations[granularity])
+          redis.expire(key[0], (options[:expiration_for] && options[:expiration_for][granularity] || Redlics.config.counter_expirations[granularity]).to_i)
         end
       end
 
@@ -86,7 +83,7 @@ module Redlics
         key = Key.name(CONTEXT, options[:event], granularity, options[:past], { id: options[:id], bucketized: false })
         Redlics.redis.pipelined do |redis|
           redis.incr(key)
-          redis.expire(key, options[:expiration_for] && options[:expiration_for][granularity] || Redlics.config.counter_expirations[granularity])
+          redis.expire(key, (options[:expiration_for] && options[:expiration_for][granularity] || Redlics.config.counter_expirations[granularity]).to_i)
         end
       end
 

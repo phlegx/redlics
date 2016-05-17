@@ -31,7 +31,7 @@ module Redlics
           key = Key.name(CONTEXT, options[:event], granularity, options[:past])
           Redlics.redis.pipelined do |redis|
             redis.setbit(key, options[:id].to_i, 1)
-            redis.expire(key, options[:expiration_for] && options[:expiration_for][granularity] || Redlics.config.tracker_expirations[granularity])
+            redis.expire(key, (options[:expiration_for] && options[:expiration_for][granularity] || Redlics.config.tracker_expirations[granularity]).to_i)
           end
         end
       end
