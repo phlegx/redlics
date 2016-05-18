@@ -64,7 +64,7 @@ Redlics.configure do |config|
     ids: true
   }
   config.granularities = {
-    minutely: { step: 1.minute, pattern: '%Y%m%d%H%m' },
+    minutely: { step: 1.minute, pattern: '%Y%m%d%H%M' },
     hourly:   { step: 1.hour,   pattern: '%Y%m%d%H' },
     daily:    { step: 1.day,    pattern: '%Y%m%d' },
     weekly:   { step: 1.week,   pattern: '%GW%V' },
