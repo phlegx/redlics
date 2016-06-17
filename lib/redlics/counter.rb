@@ -67,9 +67,11 @@ module Redlics
       def count_by_hash(options)
         granularity = options[:granularity]
         key = Key.name(CONTEXT, options[:event], granularity, options[:past], { id: options[:id], bucketized: true })
-        Redlics.redis.pipelined do |redis|
-          redis.hincrby(key[0], key[1], 1)
-          redis.expire(key[0], (options[:expiration_for] && options[:expiration_for][granularity] || Redlics.config.counter_expirations[granularity]).to_i)
+        Redlics.redis do |conn|
+          conn.pipelined do |redis|
+            redis.hincrby(key[0], key[1], 1)
+            redis.expire(key[0], (options[:expiration_for] && options[:expiration_for][granularity] || Redlics.config.counter_expirations[granularity]).to_i)
+          end
         end
       end
 
@@ -81,9 +83,11 @@ module Redlics
       def count_by_key(options)
         granularity = options[:granularity]
         key = Key.name(CONTEXT, options[:event], granularity, options[:past], { id: options[:id], bucketized: false })
-        Redlics.redis.pipelined do |redis|
-          redis.incr(key)
-          redis.expire(key, (options[:expiration_for] && options[:expiration_for][granularity] || Redlics.config.counter_expirations[granularity]).to_i)
+        Redlics.redis do |conn|
+          conn.pipelined do |redis|
+            redis.incr(key)
+            redis.expire(key, (options[:expiration_for] && options[:expiration_for][granularity] || Redlics.config.counter_expirations[granularity]).to_i)
+          end
         end
       end
 

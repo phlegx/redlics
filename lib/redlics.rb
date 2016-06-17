@@ -27,10 +27,11 @@ module Redlics
   # Get or initialize the Redis connection.
   # @return [Object] redis connection
   def redis
+    raise ArgumentError, 'requires a block' unless block_given?
     redis_pool.with do |conn|
       retryable = true
       begin
-        conn
+        yield conn
       rescue Redis::BaseError => e
         raise e unless config.silent
       rescue Redis::CommandError => ex
@@ -48,19 +49,19 @@ module Redlics
   # @return [String] Lua script result
   def script(file, *args)
     begin
-      cache = LUA_CACHE[redis.client.options[:url]]
+      cache = LUA_CACHE[redis { |r| r.client.options[:url] }]
       if cache.key?(file)
         sha = cache[file]
       else
         src = File.read(file)
-        sha = redis.script(:load, src)
+        sha = redis { |r| r.script(:load, src) }
         cache[file] = sha
       end
-      redis.evalsha(sha, *args)
+      redis { |r| r.evalsha(sha, *args) }
     rescue RuntimeError
       case $!.message
       when Exception::ErrorPatterns::NOSCRIPT
-        LUA_CACHE[redis.client.options[:url]].clear
+        LUA_CACHE[redis { |r| r.client.options[:url] }].clear
         retry
       else
         raise $! unless config.silent

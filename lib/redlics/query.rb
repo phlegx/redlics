@@ -44,7 +44,7 @@ module Redlics
     # Get or process tracks on Redis.
     # @return [Integer] tracks result of given query
     def tracks
-      @tracks ||= Redlics.redis.bitcount(track_bits)
+      @tracks ||= Redlics.redis { |r| r.bitcount(track_bits) }
     end
 
 
@@ -65,7 +65,7 @@ module Redlics
     # @return [Boolean] true if exists, false if not
     # @return [NilClass] nil if no object id is given
     def exists?
-      @exists ||= @options[:id] ? Redlics.redis.getbit(track_bits, @options[:id]) == 1 : nil
+      @exists ||= @options[:id] ? Redlics.redis { |r| r.getbit(track_bits, @options[:id]) } == 1 : nil
     end
 
 
@@ -197,7 +197,7 @@ module Redlics
       # @return [Integer] result of Redis delete keys
       # @return [NilClass] nil if namespaces are empty
       def reset_redis_namespaces(namespaces)
-        Redlics.redis.del(namespaces) if namespaces.any?
+        Redlics.redis { |r| r.del(namespaces) } if namespaces.any?
       end
 
     end

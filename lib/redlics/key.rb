@@ -97,7 +97,7 @@ module Redlics
     # @param string [String] the key name to check
     # @return [Boolean] true id key exists, false if not
     def exists?(key)
-      Redlics.redis.exists(key)
+      Redlics.redis { |r| r.exists(key) }
     end
 
 
@@ -117,9 +117,11 @@ module Redlics
       loop do
         ns = operation
         unless exists?(ns)
-          Redlics.redis.pipelined do |redis|
-            redis.set(ns, 0)
-            redis.expire(ns, Redlics.config.operation_expiration)
+          Redlics.redis do |conn|
+            conn.pipelined do |redis|
+              redis.set(ns, 0)
+              redis.expire(ns, Redlics.config.operation_expiration)
+            end
           end
           break ns
         end
