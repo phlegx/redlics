@@ -7,7 +7,7 @@ describe Redlics do
 
 
   it 'must respond positively' do
-    subject.redis.namespace.must_equal Redlics.config.namespace
+    subject.redis { |r| r.namespace }.must_equal Redlics.config.namespace
   end
 
 end
