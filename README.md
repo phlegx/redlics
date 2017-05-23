@@ -25,7 +25,7 @@ Record millions of tracks and counts consuming low memory! Redlics is a gem for 
 
 ## Installation
 
-**System Requirements:** Redis >= 2.8.18, Redis v3.x is recommended!
+**System Requirements:** Redis v3.x is recommended!
 
 Add this line to your application's Gemfile:
 
@@ -403,5 +403,5 @@ Keys in Redis look like this:
 
 The MIT License
 
-Copyright (c) 2015 Phlegx Systems OG
+Copyright (c) 2017 Phlegx Systems OG
 
