@@ -1,4 +1,7 @@
+require 'active_support/core_ext/module/delegation'
+require 'active_support/time'
 require 'msgpack'
+require 'ostruct'
 require 'redlics/version'
 require 'redlics/config'
 require 'redlics/exception'
@@ -54,7 +57,7 @@ module Redlics
         sha = cache[file]
       else
         src = File.read(file)
-        sha = redis { |r| r.script(:load, src) }
+        sha = redis { |r| r.redis.script(:load, src) }
         cache[file] = sha
       end
       redis { |r| r.evalsha(sha, *args) }
