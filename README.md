@@ -3,10 +3,9 @@
 [![Gem Version](https://badge.fury.io/rb/redlics.svg)](https://rubygems.org/gems/redlics)
 [![Gem](https://img.shields.io/gem/dt/redlics.svg?maxAge=2592000)](https://rubygems.org/gems/redlics)
 [![Build Status](https://secure.travis-ci.org/phlegx/redlics.svg?branch=master)](https://travis-ci.org/phlegx/redlics)
-[![Code Climate](http://img.shields.io/codeclimate/github/phlegx/redlics.svg)](https://codeclimate.com/github/phlegx/redlics)
-[![Inline Docs](http://inch-ci.org/github/phlegx/redlics.svg?branch=master)](http://inch-ci.org/github/phlegx/redlics)
-[![Dependency Status](https://gemnasium.com/phlegx/redlics.svg)](https://gemnasium.com/phlegx/redlics)
-[![License](https://img.shields.io/github/license/phlegx/redlics.svg)](http://opensource.org/licenses/MIT)
+[![Code Climate](https://codeclimate.com/github/phlegx/redlics.svg)](https://codeclimate.com/github/phlegx/redlics)
+[![Inline Docs](https://inch-ci.org/github/phlegx/redlics.svg?branch=master)](https://inch-ci.org/github/phlegx/redlics)
+[![License](https://img.shields.io/github/license/phlegx/redlics.svg)](https://opensource.org/licenses/MIT)
 
 Record millions of tracks and counts consuming low memory! Redlics is a gem for Redis analytics with tracks (using bitmaps) and counts (using buckets) encoding numbers in Redis keys and values.
 
@@ -403,5 +402,4 @@ Keys in Redis look like this:
 
 The MIT License
 
-Copyright (c) 2017 Phlegx Systems OG
-
+Copyright (c) 2022 Phlegx Systems OG
