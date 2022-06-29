@@ -21,12 +21,12 @@ Gem::Specification.new do |spec|
   spec.test_files    = Dir.glob('test/*_test.rb')
   spec.require_paths = ['lib']
 
-  spec.required_ruby_version = '>= 2.0.0'
+  spec.required_ruby_version = '>= 2.3'
   spec.add_dependency 'connection_pool', '~> 2.2'
-  spec.add_dependency 'redis', '~> 3.2'
+  spec.add_dependency 'redis', '~> 4.2'
   spec.add_dependency 'redis-namespace', '~> 1.5'
-  spec.add_dependency 'activesupport', '>= 4.2', '< 5.2'
-  spec.add_dependency 'msgpack', '>= 0.7.2', '< 2.0'
+  spec.add_dependency 'activesupport', '>= 5.2.8'
+  spec.add_dependency 'msgpack', '>= 0.7.2'
 
   spec.add_development_dependency 'rake', '~> 12.0'
   spec.add_development_dependency 'minitest', '~> 5.8'
