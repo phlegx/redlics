@@ -1,13 +1,12 @@
-module Redlics
+# frozen_string_literal: true
 
+module Redlics
   # Counter class
   module Counter
-
     # Context constant for given class.
     CONTEXT = Redlics::CONTEXTS[:counter].freeze
 
     extend self
-
 
     # Count for a given event and object id with options.
     #
@@ -18,7 +17,6 @@ module Redlics
       return count_with_hash(args.first) if args.first.is_a?(Hash)
       count_with_args(*args)
     end
-
 
     private
 
@@ -38,7 +36,6 @@ module Redlics
         end
       end
 
-
       # Count with hash.
       #
       # @param [&Block] a block with configuration options
@@ -47,7 +44,6 @@ module Redlics
         yield options = OpenStruct.new
         count_with_hash(options.to_h)
       end
-
 
       # Count with hash.
       #
@@ -58,7 +54,6 @@ module Redlics
         options.merge!(event: args[0])
         count_with_hash(options)
       end
-
 
       # Count by hash.
       #
@@ -75,7 +70,6 @@ module Redlics
         end
       end
 
-
       # Count by key.
       #
       # @param options [Hash] configuration options
@@ -90,6 +84,5 @@ module Redlics
           end
         end
       end
-
   end
 end

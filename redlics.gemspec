@@ -1,8 +1,8 @@
-# coding: utf-8
-lib = File.expand_path('../lib', __FILE__)
+# frozen_string_literal: true
+
+lib = File.expand_path('lib', __dir__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'redlics/version'
-
 
 Gem::Specification.new do |spec|
   spec.name          = 'redlics'
@@ -22,12 +22,12 @@ Gem::Specification.new do |spec|
   spec.require_paths = ['lib']
 
   spec.required_ruby_version = '>= 2.3'
+  spec.add_dependency 'activesupport', '>= 5.2.8'
   spec.add_dependency 'connection_pool', '~> 2.2'
+  spec.add_dependency 'msgpack', '>= 0.7.2'
   spec.add_dependency 'redis', '~> 4.2'
   spec.add_dependency 'redis-namespace', '~> 1.5'
-  spec.add_dependency 'activesupport', '>= 5.2.8'
-  spec.add_dependency 'msgpack', '>= 0.7.2'
 
-  spec.add_development_dependency 'rake', '~> 12.0'
   spec.add_development_dependency 'minitest', '~> 5.8'
+  spec.add_development_dependency 'rake', '~> 12.0'
 end

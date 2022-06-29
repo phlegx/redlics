@@ -1,15 +1,13 @@
+# frozen_string_literal: true
+
 require 'connection_pool'
 require 'redis'
 require 'redis/namespace'
 
-
 module Redlics
-
   # Connection namespace
   module Connection
-
     extend self
-
 
     # Create a new connection pool for Redis connection.
     #
@@ -21,7 +19,6 @@ module Redlics
       end
     end
 
-
     private
 
       # Set connection pool options.
@@ -32,7 +29,6 @@ module Redlics
         { size:    options[:pool_size],
           timeout: options[:pool_timeout] }
       end
-
 
       # Build Redis connection with options.
       #
@@ -48,7 +44,6 @@ module Redlics
           connection
         end
       end
-
 
       # Client options provided by redis-rb
       # @see https://github.com/redis/redis-rb/blob/master/lib/redis.rb
@@ -74,6 +69,5 @@ module Redlics
         opts[:driver] ||= 'ruby'
         opts
       end
-
   end
 end

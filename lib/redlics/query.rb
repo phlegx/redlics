@@ -1,16 +1,13 @@
-module Redlics
+# frozen_string_literal: true
 
+module Redlics
   # Query class
   class Query
-
-
     # Include Redlics operators.
     include Redlics::Operators
 
-
     # Gives read access to the listed instance variables.
     attr_reader :namespaces
-
 
     # Initialization of a query object
     #
@@ -29,7 +26,6 @@ module Redlics
       ObjectSpace.define_finalizer(self, self.class.finalize(namespaces)) if Redlics.config.auto_clean
     end
 
-
     # Get or process counts on Redis.
     # @return [Integer] count result of given query
     def counts
@@ -40,13 +36,11 @@ module Redlics
       )
     end
 
-
     # Get or process tracks on Redis.
     # @return [Integer] tracks result of given query
     def tracks
       @tracks ||= Redlics.redis { |r| r.bitcount(track_bits) }
     end
-
 
     # Get or process track bits on Redis.
     # @return [String] key of track bits result
@@ -60,14 +54,12 @@ module Redlics
       )
     end
 
-
     # Check if object id exists in track bits.
     # @return [Boolean] true if exists, false if not
     # @return [NilClass] nil if no object id is given
     def exists?
       @exists ||= @options[:id] ? Redlics.redis { |r| r.getbit(track_bits, @options[:id]) } == 1 : nil
     end
-
 
     # Get or process counts and plot.
     #
@@ -85,7 +77,6 @@ module Redlics
       nil
     end
 
-
     # Get or process tracks and plot.
     #
     # @return [Hash] with date times and counts
@@ -102,7 +93,6 @@ module Redlics
       nil
     end
 
-
     # Get or process counts and show keys to analyze.
     # @return [Array] list of keys to analyze
     def realize_counts!
@@ -113,7 +103,6 @@ module Redlics
       )
     end
 
-
     # Get or process tracks and show keys to analyze.
     # @return [Array] list of keys to analyze
     def realize_tracks!
@@ -123,7 +112,6 @@ module Redlics
         keys
       )
     end
-
 
     # Reset processed data (also operation keys on Redis).
     #
@@ -152,7 +140,6 @@ module Redlics
       return true
     end
 
-
     # Check if query is a leaf. A query is always a leaf.
     # This method is required for query operations.
     # @return [Boolean] true
@@ -160,10 +147,8 @@ module Redlics
       true
     end
 
-
     # Singleton class
     class << self
-
       # Short query access to analyze data.
       #
       # @param *args [Array] list of arguments of the query
@@ -180,7 +165,6 @@ module Redlics
         query
       end
 
-
       # Finalize query called from garbage collector.
       #
       # @param namespaces [Array] list of created operation keys in Redis
@@ -190,7 +174,6 @@ module Redlics
         proc { reset_redis_namespaces(namespaces) }
       end
 
-
       # Reset Redis created namespace keys.
       #
       # @param namespaces [Array] list of created operation keys in Redis
@@ -199,9 +182,7 @@ module Redlics
       def reset_redis_namespaces(namespaces)
         Redlics.redis { |r| r.del(namespaces) } if namespaces.any?
       end
-
     end
-
 
     private
 
@@ -220,7 +201,6 @@ module Redlics
         result
       end
 
-
       # Reset track bits (also operation key on Redis).
       # @return [NilClass] nil
       def reset_track_bits
@@ -228,7 +208,5 @@ module Redlics
         @namespaces.delete(@track_bits_namespace)
         @track_bits, @track_bits_namespace = nil, nil
       end
-
   end
 end
-

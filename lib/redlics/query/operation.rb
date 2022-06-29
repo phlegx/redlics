@@ -1,16 +1,14 @@
+# frozen_string_literal: true
+
 module Redlics
   class Query
-
     # Operation class
     class Operation
-
       # Include Redlics operators.
       include Redlics::Operators
 
-
       # Gives read access to the listed instance variables.
       attr_reader :namespaces
-
 
       # Initialization of a query operation object.
       #
@@ -25,7 +23,6 @@ module Redlics
         ObjectSpace.define_finalizer(self, self.class.finalize(namespaces)) if Redlics.config.auto_clean
       end
 
-
       # Get or process tracks on Redis.
       # @return [Integer] tracks result of given query operation
       def tracks
@@ -33,7 +30,6 @@ module Redlics
           Redlics.redis { |r| r.bitcount(@track_bits || traverse) }
         )
       end
-
 
       # Get or process track bits on Redis.
       # @return [String] key of track bits result
@@ -53,7 +49,6 @@ module Redlics
         )
       end
 
-
       # Check if object id exists in track bits.
       #
       # @param [Integer] the object id to check
@@ -61,7 +56,6 @@ module Redlics
       def exists?(id)
         Redlics.redis { |r| r.getbit(@track_bits || traverse, id.to_i) } == 1
       end
-
 
       # Reset processed data (also operation keys on Redis).
       #
@@ -82,17 +76,14 @@ module Redlics
         return true
       end
 
-
       # Check if query operation is a leaf in the binary tree.
       # @return [Boolean] true if a leaf, false if not
       def is_leaf?
         is_a?(Redlics::Query::Operation) && @track_bits.nil?
       end
 
-
       # Singleton class
       class << self
-
         # Finalize query operation called from garbage collector.
         #
         # @param namespaces [Array] list of created operation keys in Redis
@@ -102,7 +93,6 @@ module Redlics
           proc { reset_redis_namespaces(namespaces) }
         end
 
-
         # Reset Redis created namespace keys.
         #
         # @param namespaces [Array] list of created operation keys in Redis
@@ -111,12 +101,9 @@ module Redlics
         def reset_redis_namespaces(namespaces)
           Redlics.redis { |r| r.del(namespaces) } if namespaces.any?
         end
-
       end
 
-
       private
-
 
         # Traverse query operation binary tree and calculate operation leafs.
         # @return [String] result operation key in Redis
@@ -129,7 +116,6 @@ module Redlics
             track_bits
           end
         end
-
     end
   end
 end

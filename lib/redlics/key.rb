@@ -1,10 +1,9 @@
-module Redlics
+# frozen_string_literal: true
 
+module Redlics
   # Key namespace
   module Key
-
     extend self
-
 
     # Construct the key name with given parameters.
     #
@@ -27,7 +26,6 @@ module Redlics
       key
     end
 
-
     # Construct an array with all keys of a time frame in a given granularity.
     #
     # @param context [Hash] the hash of a context defined in Redlics::CONTEXTS
@@ -46,7 +44,6 @@ module Redlics
       end
     end
 
-
     # Prepend namespace to a key.
     #
     # @param key [String] the key name
@@ -56,7 +53,6 @@ module Redlics
       return key if key.split(Redlics.config.separator).first == Redlics.config.namespace.to_s
       "#{Redlics.config.namespace}#{Redlics.config.separator}#{key}"
     end
-
 
     # Encode a number with a mapping table.
     #
@@ -74,7 +70,6 @@ module Redlics
       encoded
     end
 
-
     # Decode a number with a mapping table.
     #
     # @param string [String] the string to encode
@@ -91,7 +86,6 @@ module Redlics
       decoded.to_i
     end
 
-
     # Check if a key exists in Redis.
     #
     # @param string [String] the key name to check
@@ -99,7 +93,6 @@ module Redlics
     def exists?(key)
       Redlics.redis { |r| r.exists(key) }
     end
-
 
     # Check if Redlics can bucketize.
     #
@@ -109,7 +102,6 @@ module Redlics
     def bucketize?(context, options = {})
       context[:long] == :counter && Redlics.config.bucket && !options[:id].nil?
     end
-
 
     # Create a unique operation key in Redis.
     # @return [String] the created unique operation key
@@ -128,7 +120,6 @@ module Redlics
       end
     end
 
-
     private
 
       # Create a operation key.
@@ -136,7 +127,6 @@ module Redlics
       def operation
         "#{Redlics::CONTEXTS[:operation][:short]}#{Redlics.config.separator}#{SecureRandom.uuid}"
       end
-
 
       # Get the time format pattern of a granularity.
       #
@@ -147,7 +137,6 @@ module Redlics
         past.strftime(Redlics.config.granularities[granularity][:pattern])
       end
 
-
       # Encode ids in event names.
       #
       # @param event [String] event name with eventual Redis namespace separator
@@ -155,7 +144,6 @@ module Redlics
       def encode_event(event)
         event.to_s.split(Redlics.config.separator).map { |v| v.match(/\A\d+\z/) ? encode(v) : v }.join(Redlics.config.separator)
       end
-
 
       # Bucketize key name with id.
       #
@@ -172,7 +160,6 @@ module Redlics
         ["#{key}#{Redlics.config.separator}#{bucket}", value]
       end
 
-
       # Unbucketize key name with id. Encode the id if configured to encode.
       #
       # @param key [String] key name
@@ -182,7 +169,6 @@ module Redlics
         id = encode(id) if Redlics.config.encode[:ids]
         "#{key}#{Redlics.config.separator}#{id}"
       end
-
 
       # Defined encode map.
       # @return [Hash] the encode map with numbers as keys
@@ -200,7 +186,6 @@ module Redlics
           '90' => '`', '91' => '~', '92' => 'ä', '93' => 'Ä', '94' => 'ü', '95' => 'Ü', '96' => 'ö', '97' => 'Ö', '98' => 'é', '99' => 'É' }).freeze
       end
 
-
       # Defined decode map.
       # @return [Hash] the decode map with numbers as values
       def decode_map
@@ -217,7 +202,6 @@ module Redlics
           '`' => '90', '~' => '91', 'ä' => '92', 'Ä' => '93', 'ü' => '94', 'Ü' => '95', 'ö' => '96', 'Ö' => '97', 'é' => '98', 'É' => '99' }).freeze
       end
 
-
       # Replace defined separator in configuration from the encode map.
       #
       # @param map [Hash] encode map hash
@@ -230,7 +214,6 @@ module Redlics
         map
       end
 
-
       # Replace defined separator in configuration from the decode map.
       #
       # @param map [Hash] decode map hash
@@ -242,6 +225,5 @@ module Redlics
         end
         map
       end
-
   end
 end

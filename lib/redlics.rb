@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'active_support/core_ext/module/delegation'
 require 'active_support/time'
 require 'msgpack'
@@ -15,17 +17,14 @@ require 'redlics/operators'
 require 'redlics/query'
 require 'redlics/query/operation'
 
-
 # Redlics namespace
 module Redlics
-
   extend self
 
   # Delegate methods to right objects.
   delegate :count, to: Counter
   delegate :track, to: Tracker
   delegate :analyze, to: Query
-
 
   # Get or initialize the Redis connection.
   # @return [Object] redis connection
@@ -43,7 +42,6 @@ module Redlics
       end
     end
   end
-
 
   # Load Lua script file and arguments in Redis.
   #
@@ -72,20 +70,17 @@ module Redlics
     end
   end
 
-
   # Get or initialize Redlics config.
   # @return [OpenStruct] Redlics configuration
   def config
     @config ||= Redlics::Config.new
   end
 
-
   # Set configuration of Redlics in a block.
   # @return [OpenStruct] Redlics configuration
   def configure
     yield config if block_given?
   end
-
 
   private
 
@@ -94,6 +89,4 @@ module Redlics
     def redis_pool
       @redis ||= Redlics::Connection.create(config.to_h)
     end
-
 end
-

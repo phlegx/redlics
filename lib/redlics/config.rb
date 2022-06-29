@@ -1,14 +1,13 @@
-module Redlics
+# frozen_string_literal: true
 
+module Redlics
   # Redlics constants.
   LUA_CACHE      = Hash.new { |h, k| h[k] = Hash.new }
   LUA_SCRIPT     = File.expand_path('../lua/script.lua', __FILE__).freeze
   CONTEXTS       = { counter: { short: :c, long: :counter }, tracker: { short: :t, long: :tracker }, operation: { short: :o, long: :operation } }.freeze
 
-
   # Configuration class
   class Config
-
     # Initialization with default configuration.
     #
     # Configure Redis:
@@ -48,7 +47,6 @@ module Redlics
       )
     end
 
-
     # Send missing methods to the OpenStruct configuration.
     #
     # @param method [String] the missing method name
@@ -57,6 +55,5 @@ module Redlics
     def method_missing(method, *args, &block)
       @config.send(method, *args, &block)
     end
-
   end
 end

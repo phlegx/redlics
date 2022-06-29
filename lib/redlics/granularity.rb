@@ -1,10 +1,9 @@
-module Redlics
+# frozen_string_literal: true
 
+module Redlics
   # Granularity namespace
   module Granularity
-
     extend self
-
 
     # Validate granularities by given context.
     #
@@ -17,7 +16,6 @@ module Redlics
       check(granularities) || default(context)
     end
 
-
     # Get default granularities by given context.
     #
     # @param context [Hash] the hash of a context defined in Redlics::CONTEXTS
@@ -25,7 +23,6 @@ module Redlics
     def default(context)
       check(Redlics.config["#{context[:long]}_granularity"]) || [Redlics.config.granularities.keys.first]
     end
-
 
     private
 
@@ -47,6 +44,5 @@ module Redlics
                   end
         checked.any? ? checked : nil
       end
-
   end
 end

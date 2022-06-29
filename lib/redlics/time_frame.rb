@@ -1,11 +1,10 @@
-module Redlics
+# frozen_string_literal: true
 
+module Redlics
   # Time Frame class
   class TimeFrame
-
     # Gives read access to the listed instance variables.
     attr_reader :from, :to, :granularity
-
 
     # Initialization of a time frame object.
     #
@@ -22,7 +21,6 @@ module Redlics
       @granularity = Granularity.validate(context, options[:granularity]).first
     end
 
-
     # Construct keys by time frame steps.
     # @return [Array] keys
     def splat
@@ -32,7 +30,6 @@ module Redlics
         end
       end
     end
-
 
     private
 
@@ -44,7 +41,6 @@ module Redlics
       def init_with_time(time, context)
         [time.beginning_of_day, time.end_of_day]
       end
-
 
       # Initialize time frames `from` and `to` by symbol.
       #
@@ -76,7 +72,6 @@ module Redlics
         end
       end
 
-
       # Initialize time frames `from` and `to` by hash.
       #
       # @param hash [Hash] a time hash with keys `from` and `to`
@@ -87,7 +82,6 @@ module Redlics
           hash[:to]   && hash[:to].is_a?(String)   && Time.parse(hash[:to])   || hash[:to]   || Time.now ]
       end
 
-
       # Initialize time frames `from` and `to` by hash.
       #
       # @param range [Range] a time range
@@ -97,7 +91,6 @@ module Redlics
         init_with_hash({ from: range.first, to: range.last }, context)
       end
 
-
       # Get default granularity by given context.
       #
       # @param context [Hash] the hash of a context defined in Redlics::CONTEXTS
@@ -105,6 +98,5 @@ module Redlics
       def default(context)
         Redlics.config.granularities[Granularity.default(context).first][:step].ago
       end
-
   end
 end

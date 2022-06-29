@@ -1,13 +1,12 @@
-module Redlics
+# frozen_string_literal: true
 
+module Redlics
   # Tracker class
   module Tracker
-
     # Context constant for given class.
     CONTEXT = Redlics::CONTEXTS[:tracker].freeze
 
     extend self
-
 
     # Track for a given event and object id with options.
     #
@@ -18,7 +17,6 @@ module Redlics
       return track_with_hash(args.first) if args.first.is_a?(Hash)
       track_with_args(*args)
     end
-
 
     private
 
@@ -38,7 +36,6 @@ module Redlics
         end
       end
 
-
       # Track with hash.
       #
       # @param [&Block] a block with configuration options
@@ -47,7 +44,6 @@ module Redlics
         yield options = OpenStruct.new
         track_with_hash(options.to_h)
       end
-
 
       # Track with hash.
       #
@@ -61,6 +57,5 @@ module Redlics
         })
         track_with_hash(options)
       end
-
   end
 end
