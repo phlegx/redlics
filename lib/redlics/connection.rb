@@ -37,7 +37,7 @@ module Redlics
       # @return [Redis::Namespace] Redis namespaced connection
       def build_connection(options)
         namespace = options[:namespace]
-        connection = Redis.new(redis_opts(options))
+        connection = options[:redis].is_a?(Redis) ? options[:redis] : Redis.new(redis_opts(options))
         if namespace
           Redis::Namespace.new(namespace, redis: connection)
         else

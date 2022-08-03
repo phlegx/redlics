@@ -24,7 +24,7 @@ Record millions of tracks and counts consuming low memory! Redlics is a gem for 
 
 ## Installation
 
-**System Requirements:** Redis v3.x is recommended!
+**System Requirements:** Redis >= v3.x is recommended!
 
 Add this line to your application's Gemfile:
 
@@ -52,7 +52,7 @@ Redlics.configure do |config|
   config.pool_size = 5                              # Default connection pool size is 5
   config.pool_timeout = 5                           # Default connection pool timeout is 5
   config.namespace = 'rl'                           # Default Redis namespace is 'rl', short name saves memory
-  config.redis = { url: 'redis://127.0.0.1:6379' }  # Default Redis configuration, see: https://github.com/redis/redis-rb/blob/master/lib/redis.rb
+  config.redis = { url: 'redis://127.0.0.1:6379' }  # Default Redis configuration or Redis object, see: https://github.com/redis/redis-rb/blob/master/lib/redis.rb
   config.silent = false                             # Silent Redis errors, default is false
   config.separator = ':'                            # Default Redis namespace separator, default is ':'
   config.bucket = true                              # Bucketize counter object ids, default is true
