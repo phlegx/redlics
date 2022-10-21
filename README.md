@@ -402,4 +402,4 @@ Keys in Redis look like this:
 
 The MIT License
 
-Copyright (c) 2022 Phlegx Systems OG
+Copyright (c) 2022 Phlegx Systems Technologies GmbH
