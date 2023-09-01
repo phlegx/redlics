@@ -25,7 +25,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'activesupport', '>= 5.2.8'
   spec.add_dependency 'connection_pool', '~> 2.2'
   spec.add_dependency 'msgpack', '>= 0.7.2'
-  spec.add_dependency 'redis', '~> 4.2'
+  spec.add_dependency 'redis', '>= 4.2'
   spec.add_dependency 'redis-namespace', '~> 1.5'
 
   spec.add_development_dependency 'minitest', '~> 5.8'

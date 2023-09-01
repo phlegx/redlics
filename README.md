@@ -2,7 +2,6 @@
 
 [![Gem Version](https://badge.fury.io/rb/redlics.svg)](https://rubygems.org/gems/redlics)
 [![Gem](https://img.shields.io/gem/dt/redlics.svg?maxAge=2592000)](https://rubygems.org/gems/redlics)
-[![Build Status](https://secure.travis-ci.org/phlegx/redlics.svg?branch=master)](https://travis-ci.org/phlegx/redlics)
 [![Code Climate](https://codeclimate.com/github/phlegx/redlics.svg)](https://codeclimate.com/github/phlegx/redlics)
 [![Inline Docs](https://inch-ci.org/github/phlegx/redlics.svg?branch=master)](https://inch-ci.org/github/phlegx/redlics)
 [![License](https://img.shields.io/github/license/phlegx/redlics.svg)](https://opensource.org/licenses/MIT)
@@ -402,4 +401,4 @@ Keys in Redis look like this:
 
 The MIT License
 
-Copyright (c) 2022 Phlegx Systems Technologies GmbH
+Copyright (c) 2023 Phlegx Systems Technologies GmbH
